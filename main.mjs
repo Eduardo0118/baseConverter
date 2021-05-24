@@ -1,19 +1,16 @@
-import {decToBase, baseToDec } from "./functions.mjs";
+import {valueToBase } from "./functions.mjs";
 
 const args = process.argv.slice(2);
-const [number, base] = args.slice(0, 2);
+const [value, inputBase, outputBase] = args.slice(0, 3);
 
-if (args.length === 2) {
+if (args.length === 3) {
   try {
-    console.log(decToBase(number, base));
+    console.log(valueToBase(value, inputBase, outputBase));
   } catch (err) {
     console.log(err.message);
   }
 } else {
-  const pathParts = process.cwd().split("/");
-  // fs.realpathSync('.') // process.env.PWD
+  const pathParts = process.cwd().split("/"); // fs.realpathSync('.') // process.env.PWD
   const baseName = pathParts[pathParts.length - 1];
-  console.log(`Usage: node ${baseName} <number> <base>`);
+  console.log(`Usage: node ${baseName} <value> <value base> <convert base>`);
 }
-
-console.log(baseToDec('1EE', 16));

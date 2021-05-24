@@ -19,16 +19,16 @@ export function decToBase(decimal, outputBase) {
 
     while (dividend > 0) {
       remainder = Number(dividend % divisor);
-      process.stdout.write(`${dividend} / ${divisor} = `);
+      // process.stdout.write(`${dividend} / ${divisor} = `);
 
       dividend = Math.floor(dividend / divisor); // quotient
 
-      console.log(`${dividend}`);
-      console.log(`Remainder = ${remainder}`);
+      // console.log(`${dividend}`);
+      // console.log(`Remainder = ${remainder}`);
 
       converted = digits[remainder] + converted;
 
-      console.log(`Converted = ${converted}\n`);
+      // console.log(`Converted = ${converted}\n`);
     }
 
     return positive ? converted : "- " + converted;
@@ -37,8 +37,9 @@ export function decToBase(decimal, outputBase) {
 
 export function baseToDec(value, valueBase) {
   valueBase = Number(valueBase);
-  if (valueBase < 2 || valueBase > 36) {
-    throw new Error("Invalid base. Less than 2 or greater than 36.");
+
+  if (isNaN(valueBase) || valueBase < 2 || valueBase > 36) {
+    throw new Error(`Invalid base ${valueBase}. It should be a number between 2 and 36.`);
   } else {
     const possibleDigits = digits.slice(0, valueBase);
 
@@ -55,6 +56,15 @@ export function baseToDec(value, valueBase) {
       converted += possibleDigits.indexOf(digit);
     }
 
-    return positive ? converted : "- " + converted;
+    return positive ? Number(converted) : -Number(converted);
   }
+}
+
+export function valueToBase(value, inputBase, outputBase) {
+  const decValue = baseToDec(value, inputBase);
+  const converted = decToBase(decValue, outputBase);
+
+  console.log(`Value ${value} (base ${inputBase}) is ${converted} (base ${outputBase}).`)
+
+  return converted;
 }
