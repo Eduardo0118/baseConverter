@@ -1,4 +1,4 @@
-import decToBase from "./functions.mjs";
+import {decToBase, baseToDec } from "./functions.mjs";
 
 const args = process.argv.slice(2);
 const [number, base] = args.slice(0, 2);
@@ -15,3 +15,5 @@ if (args.length === 2) {
   const baseName = pathParts[pathParts.length - 1];
   console.log(`Usage: node ${baseName} <number> <base>`);
 }
+
+console.log(baseToDec('1EE', 16));
