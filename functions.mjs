@@ -36,6 +36,7 @@ export function decToBase(decimal, outputBase) {
 }
 
 export function baseToDec(value, valueBase) {
+  value = value.toUpperCase();
   valueBase = Number(valueBase);
 
   if (isNaN(valueBase) || valueBase < 2 || valueBase > 36) {
